@@ -12,7 +12,7 @@ cohesive capability, data, migrations, runtime, and contract.
 
 ## Separate identity from profile
 
-Keycloak manages login, credentials, sessions, and coarse roles. DropIn manages
+Keycloak manages login, credentials, sessions, and coarse roles. Meet Me @ manages
 social profiles and resource-specific permissions.
 
 ## Own data locally

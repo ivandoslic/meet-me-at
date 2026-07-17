@@ -19,7 +19,7 @@ Android applications are public OIDC clients. Future backend APIs are resource
 servers.
 
 OAuth 2.0 delegates access. OpenID Connect adds user authentication and identity
-claims. Keycloak performs login and issues tokens; it does not replace DropIn's
+claims. Keycloak performs login and issues tokens; it does not replace Meet Me @'s
 domain authorization.
 
 ## Recommended implementation sequence
@@ -41,14 +41,14 @@ hostname/port settings as needed, and dependency on PostgreSQL readiness.
 Bootstrap administrator credentials through local environment variables. They
 are development bootstrap values, not application-user credentials.
 
-### 3. Create the `dropin` realm
+### 3. Create the `meet-me-at` realm
 
 Do not build the application inside the `master` realm. The master realm is for
 administering Keycloak itself.
 
 Define:
 
-- Realm name: `dropin`
+- Realm name: `meet-me-at`
 - Registration and email-verification policy for local development
 - Login and session lifetimes intentionally rather than leaving them unexplored
 - Brute-force protection experiments
@@ -70,8 +70,8 @@ belongs in the Hangout Service.
 
 Create separate clients for:
 
-- `dropin-web`
-- `dropin-android`
+- `meet-me-at-web`
+- `meet-me-at-android`
 
 Both clients are public: client authentication is disabled because browser and
 mobile binaries cannot protect a secret.
@@ -91,7 +91,7 @@ Inspect access-token and ID-token claims and understand the difference. Keep
 access tokens small. Do not put mutable profile data or large permission lists in
 tokens.
 
-The stable Keycloak `sub` claim becomes the identity link stored by DropIn
+The stable Keycloak `sub` claim becomes the identity link stored by Meet Me @
 services. Usernames and email addresses can change and should not be used as
 foreign keys.
 
@@ -150,7 +150,7 @@ Verify at minimum:
 
 - [ ] PostgreSQL and Keycloak are defined in Compose with pinned images.
 - [ ] Keycloak uses its own persistent PostgreSQL database.
-- [ ] The `dropin` realm exists outside the master realm.
+- [ ] The `meet-me-at` realm exists outside the master realm.
 - [ ] Realm roles are defined and tested.
 - [ ] Web and Android public clients exist.
 - [ ] Authorization Code Flow with PKCE S256 works.

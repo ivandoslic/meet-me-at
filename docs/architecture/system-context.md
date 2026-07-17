@@ -1,6 +1,6 @@
 # System context
 
-DropIn connects people who want to meet at short-lived, location-based Hangouts.
+Meet Me @ connects people who want to meet at short-lived, location-based Hangouts.
 
 ## Actors
 

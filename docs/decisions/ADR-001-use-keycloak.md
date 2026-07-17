@@ -5,7 +5,7 @@ Date: 2026-07-17
 
 ## Context
 
-DropIn needs users, login, sessions, roles, OAuth 2.0, and OpenID Connect. Writing
+Meet Me @ needs users, login, sessions, roles, OAuth 2.0, and OpenID Connect. Writing
 an authorization server would consume the project while providing a weaker
 security baseline.
 
@@ -14,7 +14,7 @@ security baseline.
 Use Keycloak for authentication, token issuance, user administration, coarse
 realm roles, and development identity federation experiments.
 
-DropIn services remain responsible for resource-specific authorization.
+Meet Me @ services remain responsible for resource-specific authorization.
 
 ## Alternatives considered
 

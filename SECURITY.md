@@ -1,6 +1,6 @@
 # Security policy
 
-DropIn is an educational project and is not intended for production use without
+Meet Me @ is an educational project and is not intended for production use without
 a separate security review.
 
 ## Local secrets

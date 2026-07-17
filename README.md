@@ -1,6 +1,6 @@
-# DropIn
+# Meet Me @
 
-DropIn is a mock corporate social platform for creating temporary real-world
+Meet Me @ is a mock corporate social platform for creating temporary real-world
 hangouts. A user can announce that they are at a venue, invite others, discover
 nearby hangouts, join them, and receive notifications.
 

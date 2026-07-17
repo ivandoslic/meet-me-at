@@ -11,7 +11,7 @@
 ## Phase 1 — Identity
 
 - PostgreSQL and Keycloak containers
-- DropIn realm
+- Meet Me @ realm
 - Roles, scopes, and public clients
 - Authorization Code Flow with PKCE
 - Reproducible realm configuration
