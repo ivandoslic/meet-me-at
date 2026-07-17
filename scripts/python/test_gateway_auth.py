@@ -247,6 +247,18 @@ def main() -> None:
     if access_claims.get("sub") != id_claims.get("sub"):
         raise RuntimeError("Access and ID token subjects do not match")
 
+    audience = access_claims.get("aud", [])
+
+    if isinstance(audience, str):
+        audience = [audience]
+
+    if "meet-me-at-api" not in audience:
+        raise RuntimeError(
+            f"Expected meet-me-at-api audience, received: {audience}"
+        )
+
+    print(f"Token audiences: {', '.join(audience)}")
+
     username = access_claims.get("preferred_username", "<unknown>")
     print(f"Authenticated as: {username}")
     print()
