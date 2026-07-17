@@ -1,0 +1,46 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# IDEs and operating systems
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Java, Kotlin, and Gradle
+.gradle/
+build/
+out/
+*.class
+
+# JavaScript
+node_modules/
+.react-router/
+dist/
+coverage/
+playwright-report/
+test-results/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Android
+.cxx/
+captures/
+local.properties
+*.apk
+*.aab
+
+# Logs and generated local data
+*.log
+.data/
+.artifacts/
+

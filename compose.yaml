@@ -1,0 +1,6 @@
+name: dropin
+
+# Phase 0 intentionally defines no runnable containers.
+# Phase 1 introduces PostgreSQL and Keycloak here.
+services: {}
+
