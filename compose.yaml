@@ -11,6 +11,10 @@ services:
       KEYCLOAK_DB_NAME: ${KEYCLOAK_DB_NAME:-keycloak}
       KEYCLOAK_DB_USER: ${KEYCLOAK_DB_USER:-keycloak}
       KEYCLOAK_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:?Set KEYCLOAK_DB_PASSWORD in .env}
+
+      PROFILE_DB_NAME: ${PROFILE_DB_NAME:-profile_service}
+      PROFILE_DB_USER: ${PROFILE_DB_USER:-profile_service}
+      PROFILE_DB_PASSWORD: ${PROFILE_DB_PASSWORD:?Set PROFILE_DB_PASSWORD in .env}
     
     ports:
       - "127.0.0.1:5432:5432"
