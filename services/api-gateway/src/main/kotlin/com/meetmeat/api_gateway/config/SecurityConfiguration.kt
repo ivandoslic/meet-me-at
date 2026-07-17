@@ -1,6 +1,7 @@
 package com.meetmeat.api_gateway.config
 
 import com.meetmeat.api_gateway.security.AudienceValidator
+import com.meetmeat.api_gateway.security.KeycloakRealmRoleConverter
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -13,6 +14,13 @@ import org.springframework.security.oauth2.jwt.JwtValidators
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder
 import org.springframework.security.web.server.SecurityWebFilterChain
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.core.convert.converter.Converter
+import org.springframework.security.authentication.AbstractAuthenticationToken
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter
+import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverterAdapter
+import reactor.core.publisher.Mono
+
 
 @Configuration
 @EnableWebFluxSecurity
@@ -21,6 +29,9 @@ class SecurityConfiguration {
     @Bean
     fun securityWebFilterChain(
         http: ServerHttpSecurity,
+        @Qualifier("jwtAuthenticationConverter")
+        authenticationConverter:
+            Converter<Jwt, Mono<AbstractAuthenticationToken>>,
     ): SecurityWebFilterChain =
         http {
             csrf {
@@ -42,14 +53,31 @@ class SecurityConfiguration {
             authorizeExchange {
                 authorize("/actuator/health", permitAll)
                 authorize("/actuator/health/**", permitAll)
-                authorize("/api/**", authenticated)
+                authorize("/api/admin/**", hasAuthority("ROLE_APP_ADMIN"))
+                authorize("/api/moderation/**", hasAuthority("ROLE_MODERATOR"))
+                authorize("/api/**", hasAuthority("ROLE_USER"))
                 authorize(anyExchange, permitAll)
             }
 
             oauth2ResourceServer {
-                jwt { }
+                jwt {
+                    jwtAuthenticationConverter = authenticationConverter
+                }
             }
         }
+
+    @Bean
+    fun jwtAuthenticationConverter():
+        Converter<Jwt, Mono<AbstractAuthenticationToken>> {
+        val converter = JwtAuthenticationConverter()
+
+        converter.setPrincipalClaimName("preferred_username")
+        converter.setJwtGrantedAuthoritiesConverter(
+            KeycloakRealmRoleConverter(),
+        )
+
+        return ReactiveJwtAuthenticationConverterAdapter(converter)
+    }
 
     @Bean
     fun jwtDecoder(
