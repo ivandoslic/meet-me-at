@@ -44,3 +44,5 @@ local.properties
 .data/
 .artifacts/
 
+# Temporary Keycloak CLI exports
+/infrastructure/keycloak/export/
